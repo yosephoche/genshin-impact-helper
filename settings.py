@@ -2,6 +2,7 @@
 import logging
 import json
 import requests
+import os
 
 from requests.exceptions import HTTPError
 
@@ -64,6 +65,8 @@ class HttpRequest(object):
 req = HttpRequest()
 CONFIG = _Config()
 log.basicConfig(level=CONFIG.LOG_LEVEL)
+if os.environ['USER_AGENT']:
+    CONFIG.WB_USER_AGENT = os.environ['USER_AGENT']
 
 MESSAGE_TEMPLATE = '''
     {today:#^28}
