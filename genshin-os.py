@@ -47,21 +47,17 @@ class Sign(Base):
         super(Sign, self).__init__(cookies)
         self.uid = uid
 
-    def get_header(self):
-        header = super(Sign, self).get_header()
-        return header
+    # def get_header(self): no override
 
     def get_info(self):
-        log.info('准备获取签到信息...')
         info_url = CONFIG.OS_INFO_URL
         try:
             response = req.request(
                 'get', info_url, headers=self.get_header()).text
+            return req.to_python(response)
         except Exception as e:
-            raise Exception(e)
-
-        log.info('签到信息获取完毕')
-        return req.to_python(response)
+            log.error('failure in get_info')
+            raise
 
     def run(self):
         info_list = self.get_info()
@@ -73,7 +69,7 @@ class Sign(Base):
             uid = str(self.uid).replace(
                 str(self.uid)[1:7], '******', 1)
 
-            log.info(f'准备为旅行者 {uid} 签到...')
+            log.info(f'Checking in account id {uid}...')
             time.sleep(10)
             message = {
                 'today': today,
@@ -85,14 +81,14 @@ class Sign(Base):
             if info_list.get('data',{}).get('is_sign') is True:
                 message['award_name'] = awards[total_sign_day - 1]['name']
                 message['award_cnt'] = awards[total_sign_day - 1]['cnt']
-                message['status'] = f"👀 Traveler, you've already checked in today"
+                message['status'] = f"Traveler, you've already checked in today"
                 message_list.append(self.message.format(**message))
                 return ''.join(message_list)
             else:
                 message['award_name'] = awards[total_sign_day]['name']
                 message['award_cnt'] = awards[total_sign_day]['cnt']
             if info_list.get('data',{}).get('first_bind') is True:
-                message['status'] = f'💪 Please check in manually once'
+                message['status'] = f'Please check in manually once'
                 message_list.append(self.message.format(**message))
                 return ''.join(message_list)
 
@@ -105,7 +101,7 @@ class Sign(Base):
                     'post', CONFIG.OS_SIGN_URL, headers=self.get_header(),
                     data=json.dumps(data, ensure_ascii=False)).text)
             except Exception as e:
-                raise Exception(e)
+                raise
             code = response.get('retcode', 99999)
             # 0:      success
             # -5003:  already checked in
@@ -115,7 +111,7 @@ class Sign(Base):
             message['total_sign_day'] = total_sign_day + 1
             message['status'] = response['message']
             message_list.append(self.message.format(**message))
-        log.info('签到完毕')
+        log.info('Check-in complete')
 
         return ''.join(message_list)
 
@@ -125,34 +121,44 @@ class Sign(Base):
 
 
 if __name__ == '__main__':
-    log.info(f'🌀Genshin Impact Helper v{CONFIG.GIH_VERSION}')
+    log.info(f'Genshin Impact Check-In Helper v{CONFIG.GIH_VERSION}')
     log.info('If you fail to check in, please try to update!')
-    log.info('任务开始')
+
     notify = Notify()
     msg_list = []
     ret = success_num = fail_num = 0
-    """HoYoLAB Community's COOKIE
-    :param OS_COOKIE: 米游社国际版的COOKIE.多个账号的COOKIE值之间用 # 号隔开,例如: 1#2#3#4
     """
-    # Github Actions用户请到Repo的Settings->Secrets里设置变量,变量名字必须与上述参数变量名字完全一致,否则无效!!!
-    # Name=<变量名字>,Value=<获取的值>
+    HoYoLAB Community's COOKIE
+    :param OS_COOKIE: HoYoLAB cookie(s) for one or more accounts.
+        Separate cookies for multiple accounts with the hash symbol #
+        e.g. cookie1text#cookie2text
+        Do not surround cookies with quotes "" if using Github Secrets.
+    """
+    # Github Actions -> Settings -> Secrets
+    # Ensure that the Name is exactly: OS_COOKIE
+    # Value should look like: login_ticket=xxx; account_id=696969; cookie_token=xxxxx; ltoken=xxxx; ltuid=696969; mi18nLang=en-us; _MHYUUID=xxx
+    #         Separate cookies for multiple accounts with the hash symbol #
+    #         e.g. cookie1text#cookie2text
     OS_COOKIE = ''
 
     if os.environ.get('OS_COOKIE', '') != '':
         OS_COOKIE = os.environ['OS_COOKIE']
+    else:
+        log.error("Cookie not set properly, please read the documentation on how to set and format your cookie in Github Secrets.")
+        raise Exception("Cookie failure")
 
     cookie_list = OS_COOKIE.split('#')
-    log.info(f'检测到共配置了 {len(cookie_list)} 个帐号')
+    log.info(f'Number of account cookies read: {len(cookie_list)}')
     for i in range(len(cookie_list)):
-        log.info(f'准备为 NO.{i + 1} 账号签到...')
+        log.info(f'Preparing NO.{i + 1} Account Check-In...')
         try:
             ltoken = cookie_list[i].split('ltoken=')[1].split(';')[0]
             uid = cookie_list[i].split('account_id=')[1].split(';')[0]
-            msg = f'	NO.{i + 1} 账号:{Sign(cookie_list[i]).run()}'
+            msg = f'	NO.{i + 1} Account:{Sign(cookie_list[i]).run()}'
             msg_list.append(msg)
             success_num = success_num + 1
         except Exception as e:
-            msg = f'	NO.{i + 1} 账号:\n    {e}'
+            msg = f'	NO.{i + 1} Account:\n    {e}'
             msg_list.append(msg)
             fail_num = fail_num + 1
             log.error(msg)
@@ -160,7 +166,7 @@ if __name__ == '__main__':
         continue
     notify.send(status=f'Number of successful sign-ins: {success_num} | Number of failed sign-ins: {fail_num}', msg=msg_list)
     if ret != 0:
-        log.error('异常退出')
+        log.error('program terminated with errors')
         exit(ret)
-    log.info('任务结束')
+    log.info('exit success')
 

@@ -109,7 +109,7 @@ class Notify(object):
             log.error(f'Discord FAILED\n{response}')
         return True
 
-    def send(self, app='Genshin Sign-In Helper', status='', msg='', **kwargs):
+    def send(self, app='Genshin Impact Check-In Helper', status='', msg='', **kwargs):
         hide = kwargs.get('hide', '')
         if isinstance(msg, list) or isinstance(msg, dict):
             # msg = self.to_json(msg)
@@ -126,4 +126,4 @@ class Notify(object):
 
 
 if __name__ == '__main__':
-    Notify().send(app='Genshin Sign-In Helper', status='Test Run', msg='Testing integration with social media APIs')
+    Notify().send(app='Genshin Impact Check-In Helper', status='Test Run', msg='Testing integration with social media APIs')
