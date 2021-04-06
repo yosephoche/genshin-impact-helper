@@ -158,7 +158,7 @@ if __name__ == '__main__':
             log.error(msg)
             ret = -1
         continue
-    notify.send(status=f'成功: {success_num} | 失败: {fail_num}', msg=msg_list)
+    notify.send(status=f'Number of successful sign-ins: {success_num} | Number of failed sign-ins: {fail_num}', msg=msg_list)
     if ret != 0:
         log.error('异常退出')
         exit(ret)
