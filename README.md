@@ -1,36 +1,40 @@
-[简体中文](README-chinese.md) | English
-<div align="center"> 
-<h1 align="center">Genshin Impact Helper</h1>
+# Genshin Impact Check-In Helper
 
-![Genshin Impact Helper](https://i.loli.net/2020/11/18/3zogEraBFtOm5nI.jpg)
-[![GitHub stars](https://img.shields.io/github/stars/y1ndan/genshin-impact-helper?style=flat-square)](https://github.com/y1ndan/genshin-impact-helper/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/y1ndan/genshin-impact-helper?style=flat-square)](https://github.com/y1ndan/genshin-impact-helper/network)
-[![GitHub issues](https://img.shields.io/github/issues/y1ndan/genshin-impact-helper?style=flat-square)](https://github.com/y1ndan/genshin-impact-helper/issues)
-[![GitHub contributors](https://img.shields.io/github/contributors/y1ndan/genshin-impact-helper?style=flat-square)](https://github.com/y1ndan/genshin-impact-helper/graphs/contributors)
-[![Telegram](https://img.shields.io/badge/chat-t.me/genshinhelper-0d86d7?style=flat-square)](https://t.me/genshinhelper)
-![Github workflow status](https://img.shields.io/github/workflow/status/y1ndan/genshin-impact-helper/Genshin%20Impact%20Helper?label=status&style=flat-square)
+[Daily Check-In](https://webstatic-sea.mihoyo.com/ys/event/signin-sea/index.html?act_id=e202102251931481&lang=en-us)
 
-</div>
+[Original Repository (defunct)](https://github.com/y1ndan/genshin-impact-helper)
+
+[TakaGG fork](https://github.com/takagg/genshin-impact-helper)
+
+[Napkatti fork](https://github.com/napkatti/genshin-impact-helper/)
 
 ## Usage
 
-- Fork this repository https://github.com/y1ndan/genshin-impact-helper to your own account.
-- Go to  https://www.hoyolab.com/genshin to get the cookie of the website.
-- Back to your repository page, Click `Settings`-->`Secrets`-->`New secret`.
-
-![new-secret.png](https://i.loli.net/2020/10/28/sxTuBFtRvzSgUaA.png)
-
-- Add a new secret named `OS_COOKIE` and the value is what you obtained in the previous step. Warning: THE NAME MUST BE `OS_COOKIE`
-- Account_id, Cookie_token, Ltoken are required fields in the secret
-
-![add-secret](https://i.imgur.com/187niY1.png)
-![add-secret](https://i.imgur.com/5rZwtK6.png)
-
-- Select `Genshin Impact Helper Global` on the Actions page.
-- Click the `Run workflow` button.
-- When the build is complete, click the `Genshin Impact Helper Global`-->`build`-->`Run sign` to view logs. 
-
-## Multiple accounts
-- Multiple account cookies need to be separated by "#" symbol
-
-![multiple-accounts](https://i.imgur.com/MFXsKbC.png)
+1. Fork this repository to your own account.
+2. Go to the Daily Check-In event website https://webstatic-sea.mihoyo.com/ys/event/signin-sea/index.html?act_id=e202102251931481&lang=en-us
+3. Log in with your MiHoYo/Genshin Impact account.
+4. Open the developer tools on your web browser (F12 on firefox/chrome)
+5. Click on the "Console" tab
+6. Type in `document.cookie` in the console
+7. Copy the text output from the console
+8. Go back to your GitHub repository page, Click "Settings" on the top right
+9. Click "Secrets" on the bottom left
+10. Click "New Repository Secret" on the top right
+11. In the "Name" box type in `OS_COOKIE`
+12. In the "Value" box paste the text you copied earlier
+    - Remove any quotation marks "" at the front or end of the text 
+    - Go back to the MiHoYo event website. You may close the tab but do not click the "Log Out" button because it may cause your cookie to expire.
+    - **IF YOU WANT TO CHECK-IN MULTIPLE GENSHIN ACCOUNTS:**
+    1. Paste your first cookie into the Value box on GitHub, but do not click "Add Secret" yet.
+    2. Open a new private browsing / Incognito window
+    3. Go to the MiHoYo event website on your new browser instance, and log in with your second account
+    4. Copy the `document.cookie` as before
+    5. Go back to the GitHub page, and type a hash `#` at the end of your first cookie
+    6. Paste your second cookie immediately after the `#` and remove the quotation marks "" if needed
+13. Click "Add Secret"
+14. Click the "Actions" tab in the top middle of the page
+15. Click "I understand my workflows"
+16. Click "Genshin Impact Helper Global"
+17. Click "Enable workflows"
+18. Click "Run workflows"
+19. You should see a yellow circle next to the job. Wait for it to become a green check mark.
