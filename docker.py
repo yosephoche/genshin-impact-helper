@@ -31,7 +31,7 @@ def main():
 
     def sign():
         log.info("Starting signing")
-        os.system("python3 ./genshin.py")
+        os.system("python3 ./genshin-os.py")
 
     sign()
     next_run_time()
