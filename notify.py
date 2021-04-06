@@ -8,7 +8,7 @@ class Notify(object):
     :param PUSH_CONFIG: JSON-formatted parameters for creating a web request to a user-specified social media API.
         Format:
             {"method":"post","url":"","data":{},"text":"","code":200,"data_type":"data","show_title_and_desp":false,"set_data_title":"","set_data_sub_title":"","set_data_desp":""}
-        说明:
+        Details:
             method: REQUIRED, HTTP method e.g. post
             url: REQUIRED, address of request.
             data: OPTIONAL, parameters sent in the body of the request.
