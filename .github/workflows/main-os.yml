@@ -2,7 +2,7 @@ name: "Genshin Impact Helper Global"
 
 on:
   schedule:
-    - cron: "0 19 * * *"  # Minute/Hour/Day/Month/Weekday (UTC)
+    - cron: "59 19 * * *"  # Minute/Hour/Day/Month/Weekday (UTC)
   workflow_dispatch:
 
 env:
@@ -36,7 +36,7 @@ jobs:
 
       - name: Run sign
         env:
-          USER_AGENT: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0
+          USER_AGENT: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0'
           OS_COOKIE: ${{ secrets.OS_COOKIE }}
           PUSH_CONFIG: ${{ secrets.PUSH_CONFIG }}
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
