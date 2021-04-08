@@ -1,16 +1,8 @@
-import hashlib
 import json
 import time
 import os
 
 from settings import log, CONFIG, req
-from notify import Notify
-
-
-def hexdigest(text):
-    md5 = hashlib.md5()
-    md5.update(text.encode())
-    return md5.hexdigest()
 
 
 class Base(object):
@@ -124,7 +116,6 @@ if __name__ == '__main__':
     log.info(f'Genshin Impact Check-In Helper v{CONFIG.GIH_VERSION}')
     log.info('If you fail to check in, please try to update!')
 
-    notify = Notify()
     msg_list = []
     ret = success_num = fail_num = 0
     """
@@ -164,7 +155,8 @@ if __name__ == '__main__':
             log.error(msg)
             ret = -1
         continue
-    notify.send(status=f'Number of successful sign-ins: {success_num} | Number of failed sign-ins: {fail_num}', msg=msg_list)
+    msg = '\n\n'.join(msg_list)
+    log.info(f'Sign-In result: Number of successful sign-ins: {success_num} | Number of failed sign-ins: {fail_num}\n\n{msg}')
     if ret != 0:
         log.error('program terminated with errors')
         exit(ret)
