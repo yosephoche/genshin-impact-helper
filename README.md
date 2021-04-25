@@ -13,7 +13,8 @@
 1. Fork this repository to your own account.  
    ![](https://imgur.com/VUH3ZwB.png)
 2. Go to the Daily Check-In event website https://webstatic-sea.mihoyo.com/ys/event/signin-sea/index.html?act_id=e202102251931481&lang=en-us
-3. Log in with your MiHoYo/Genshin Impact account.
+3. Log in with your MiHoYo/Genshin Impact account.  
+   *If you have never checked in before, manually check in once to ensure that your cookies are set properly.*
 4. Open the developer tools on your web browser (F12 on firefox/chrome)
 5. Click on the "Console" tab
 6. Type in `document.cookie` in the console
@@ -55,4 +56,25 @@
 22. You should see a yellow circle next to the job. Wait for it to become a green check mark.  
     ![](https://imgur.com/NZnhTlc.png)
 
-If you see the green check mark, congratulations, your auto check-in has been successfully set up.
+If you see the green check mark, congratulations, your auto check-in has been successfully set up.  
+Your script will now automatically run every day at your scheduled time, without you needing to have your browser open.
+
+**If you no longer want to check in automatically, you must manually disable your workflow or delete your Github repository.**
+![](https://i.imgur.com/uw8qwTF.png)
+
+## Discord Webhooks
+This is an **OPTIONAL** step to let the script send you a notification on Discord whenever it runs a check-in.
+
+Instructions provided by https://github.com/am-steph/genshin-impact-helper
+1. Edit channel settings. (Create your own discord server or private channel for this)
+   ![](https://i.imgur.com/Q0KFNzv.png)
+2. Go into Integrations and view webhooks.
+   ![](https://i.imgur.com/Z4pfACE.png)
+3. Create a new webhook and copy the URL.
+   ![](https://i.imgur.com/b3ZL3m3.png)
+4. Go back to the "Secrets" tab on the repository and add a new secret called DISCORD_WEBHOOK.
+   ![](https://i.imgur.com/YusKz6V.png)
+5. Run the github action again and check for message in the channel you set the webhook in
+   ![](https://i.imgur.com/0FMvJHW.png)
+   
+To stop receiving Discord notifications, delete your DISCORD_WEBHOOK secret.

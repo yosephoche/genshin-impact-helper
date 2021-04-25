@@ -26,7 +26,7 @@ class Notify(object):
                 与set_data_sub_title互斥,两者都填则本项不生效.
 
     :param DISCORD_WEBHOOK:
-        ## the original repo contained no documentation about how to use this, good luck i guess
+        ## https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
     """
     # Github Actions -> Settings -> Secrets
     # Ensure that the Name exactly matches the parameter names required here
