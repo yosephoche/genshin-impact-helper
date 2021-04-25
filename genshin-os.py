@@ -114,7 +114,7 @@ class Sign(Base):
 
 if __name__ == '__main__':
     log.info(f'Genshin Impact Check-In Helper v{CONFIG.GIH_VERSION}')
-    log.info('If you fail to check in, please try to update!')
+    log.info('using experimental branch')
 
     msg_list = []
     ret = success_num = fail_num = 0
