@@ -33,5 +33,7 @@ jobs:
         env:
           USER_AGENT: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0'
           OS_COOKIE: ${{ secrets.OS_COOKIE }}
+          PUSH_CONFIG: ${{ secrets.PUSH_CONFIG }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
           python3 ./notify.py
