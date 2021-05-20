@@ -120,6 +120,24 @@ class Sign(Base):
         return CONFIG.MESSAGE_TEMPLATE
 
 
+def cookie_diagnostics(cookie, print_values=False):
+    log.info(f'has login_ticket: {"login_ticket" in cookie}')
+    log.info(f'has account_id: {"account_id" in cookie}')
+    log.info(f'has cookie_token: {"cookie_token" in cookie}')
+    log.info(f'has ltoken: {"ltoken" in cookie}')
+    log.info(f'has ltuid: {"ltuid" in cookie}')
+    log.info(f'has mi18nLang: {"mi18nLang" in cookie}')
+    log.info(f'has _MHYUUID: {"_MHYUUID" in cookie}')
+    if print_values:
+        log.info(f'login_ticket: {cookie.split("login_ticket=")[1].split(";")[0]}')
+        log.info(f'account_id: {cookie.split("account_id=")[1].split(";")[0]}')
+        log.info(f'cookie_token: {cookie.split("cookie_token=")[1].split(";")[0]}')
+        log.info(f'ltoken: {cookie.split("ltoken=")[1].split(";")[0]}')
+        log.info(f'ltuid: {cookie.split("ltuid=")[1].split(";")[0]}')
+        log.info(f'mi18nLang: {cookie.split("mi18nLang=")[1].split(";")[0]}')
+        log.info(f'_MHYUUID: {cookie.split("_MHYUUID=")[1].split(";")[0]}')
+
+
 if __name__ == '__main__':
     log.info(f'Genshin Impact Check-In Helper v{CONFIG.GIH_VERSION}')
     log.info('If you fail to check in, please try to update!')
@@ -140,6 +158,7 @@ if __name__ == '__main__':
     log.info(f'Number of account cookies read: {len(cookie_list)}')
     for i in range(len(cookie_list)):
         log.info(f'Preparing NO.{i + 1} Account Check-In...')
+        cookie_diagnostics(cookie_list[i], False)
         try:
             ltoken = cookie_list[i].split('ltoken=')[1].split(';')[0]
             uid = cookie_list[i].split('account_id=')[1].split(';')[0]
