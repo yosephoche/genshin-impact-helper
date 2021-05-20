@@ -20,7 +20,8 @@ You will need to set up the environment variables named `OS_COOKIE`, `USER_AGENT
 `USER_AGENT` is basically the identifier of the web browser that you are pretending to be when making the check-in request to Mihoyo's servers.  
 Google "what is my user agent" and it should tell you (hint: it should begin with `Mozilla/5.0`)
 
-If you are running it from a private PC, feel free to hard-code the cookie text into the script since the entire script will be private anyway.
+If you are running it from a private PC, feel free to hard-code the cookie text into the script since the entire script will be private anyway.  
+To hard code the variables, edit the contents of `USER_VARIABLES` at the top of the file `settings.py`.
 
 ***While it is certainly possible to re-enable the Github Actions workflow since the instructions are not buried particularly deep, do so at your own risk. You may face a ban from Github.***
 
