@@ -134,18 +134,7 @@ if __name__ == '__main__':
         e.g. cookie1text#cookie2text
         Do not surround cookies with quotes "" if using Github Secrets.
     """
-    # Github Actions -> Settings -> Secrets
-    # Ensure that the Name is exactly: OS_COOKIE
-    # Value should look like: login_ticket=xxx; account_id=696969; cookie_token=xxxxx; ltoken=xxxx; ltuid=696969; mi18nLang=en-us; _MHYUUID=xxx
-    #         Separate cookies for multiple accounts with the hash symbol #
-    #         e.g. cookie1text#cookie2text
-    OS_COOKIE = ''
-
-    if os.environ.get('OS_COOKIE', '') != '':
-        OS_COOKIE = os.environ['OS_COOKIE']
-    else:
-        log.error("Cookie not set properly, please read the documentation on how to set and format your cookie in Github Secrets.")
-        raise Exception("Cookie failure")
+    OS_COOKIE = CONFIG.OS_COOKIE
 
     cookie_list = OS_COOKIE.split('#')
     log.info(f'Number of account cookies read: {len(cookie_list)}')

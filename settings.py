@@ -3,8 +3,17 @@ import logging
 import json
 import requests
 import os
-
 from requests.exceptions import HTTPError
+
+# hard code your variables here if you are running the script from a private PC
+USER_VARIABLES = {
+    'USER_AGENT': '',  # google "what is my user agent", should begin with Mozilla/5.0
+    'OS_COOKIE': '',  # your genshin/hoyolab login cookie (see below)
+    'DISCORD_WEBHOOK': '',  # optional
+}
+# OS_COOKIE Value should look like: login_ticket=xxx; account_id=696969; cookie_token=xxxxx; ltoken=xxxx; ltuid=696969; mi18nLang=en-us; _MHYUUID=xxx
+#         Separate cookies for multiple accounts with the hash symbol #
+#         e.g. cookie1text#cookie2text
 
 __all__ = ['log', 'CONFIG', 'req']
 
@@ -19,6 +28,9 @@ class _Config:
     GIH_VERSION = '1.7.0.210301-alpha'
     LOG_LEVEL = logging.INFO
     # LOG_LEVEL = logging.DEBUG
+    OS_COOKIE = ''
+    DISCORD_WEBHOOK = ''
+    PUSH_CONFIG = '' #just leaving this here, no one actually uses this anyway
 
     # HoYoLAB
     LANG = 'en-us'
@@ -65,12 +77,24 @@ class HttpRequest(object):
 req = HttpRequest()
 CONFIG = _Config()
 log.basicConfig(level=CONFIG.LOG_LEVEL)
-if os.environ['USER_AGENT']:
+if USER_VARIABLES['OS_COOKIE']:
+    CONFIG.OS_COOKIE = USER_VARIABLES['OS_COOKIE']
+elif os.environ['OS_COOKIE']:
+    CONFIG.OS_COOKIE = os.environ['OS_COOKIE']
+if not CONFIG.OS_COOKIE:
+    raise Exception("no OS_COOKIE configured")
+if USER_VARIABLES['USER_AGENT']:
+    CONFIG.WB_USER_AGENT = USER_VARIABLES['USER_AGENT']
+elif os.environ['USER_AGENT']:
     CONFIG.WB_USER_AGENT = os.environ['USER_AGENT']
+if USER_VARIABLES['DISCORD_WEBHOOK']:
+    CONFIG.DISCORD_WEBHOOK = USER_VARIABLES['DISCORD_WEBHOOK']
+elif os.environ['DISCORD_WEBHOOK']:
+    CONFIG.DISCORD_WEBHOOK = os.environ['DISCORD_WEBHOOK']
 
 MESSAGE_TEMPLATE = '''
     {today:#^28}
-    [{region_name}]{uid}
+    [UID:{region_name}]{uid}
     Today's rewards: {award_name} × {award_cnt}
     Monthly Check-In count: {total_sign_day} days
     Check-in result: {status}

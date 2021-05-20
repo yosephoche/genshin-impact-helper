@@ -1,6 +1,5 @@
-import os
 from discord_webhook import DiscordWebhook, DiscordEmbed
-from settings import log, req
+from settings import log, CONFIG, req
 
 
 class Notify(object):
@@ -34,13 +33,9 @@ class Notify(object):
 
     def __init__(self):
         # Custom Push Config
-        self.PUSH_CONFIG = ''
-        if 'PUSH_CONFIG' in os.environ:
-            self.PUSH_CONFIG = os.environ['PUSH_CONFIG']
+        self.PUSH_CONFIG = CONFIG.PUSH_CONFIG
         # Discord Webhook
-        self.DISCORD_WEBHOOK = ''
-        if 'DISCORD_WEBHOOK' in os.environ:
-            self.DISCORD_WEBHOOK = os.environ['DISCORD_WEBHOOK']
+        self.DISCORD_WEBHOOK = CONFIG.DISCORD_WEBHOOK
 
     def pushTemplate(self, method, url, params=None, data=None, json=None, headers=None, **kwargs):
         name = kwargs.get('name')
