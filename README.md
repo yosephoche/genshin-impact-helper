@@ -14,7 +14,7 @@
 
 ### Actions tutorial has been removed due to Github terms of service.
 
-To run this script, please download the repository and schedule `notify.py` to run every day using an always-on PC, a Raspberry Pi, or cloud services such as Heroku etc.
+To run this script, please download the repository and schedule `genshin-os.py` to run every day using an always-on PC, a Raspberry Pi, or cloud services such as Heroku etc.
 
 You will need to set up the environment variables named `OS_COOKIE`, `USER_AGENT` (and optionally `DISCORD_WEBHOOK`)  
 `USER_AGENT` is basically the identifier of the web browser that you are pretending to be when making the check-in request to Mihoyo's servers.  
