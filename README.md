@@ -16,7 +16,9 @@
 
 To run this script, please download the repository and schedule `notify.py` to run every day using an always-on PC, a Raspberry Pi, or cloud services such as Heroku etc.
 
-You will need to set up the environment variables named `OS_COOKIE` (and optionally `DISCORD_WEBHOOK`)
+You will need to set up the environment variables named `OS_COOKIE`, `USER_AGENT` (and optionally `DISCORD_WEBHOOK`)  
+`USER_AGENT` is basically the identifier of the web browser that you are pretending to be when making the check-in request to Mihoyo's servers.  
+Google "what is my user agent" and it should tell you (hint: it should begin with `Mozilla/5.0`)
 
 If you are running it from a private PC, feel free to hard-code the cookie text into the script since the entire script will be private anyway.
 
