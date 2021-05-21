@@ -79,18 +79,18 @@ CONFIG = _Config()
 log.basicConfig(level=CONFIG.LOG_LEVEL)
 if USER_VARIABLES['OS_COOKIE']:
     CONFIG.OS_COOKIE = USER_VARIABLES['OS_COOKIE']
-elif os.environ['OS_COOKIE']:
-    CONFIG.OS_COOKIE = os.environ['OS_COOKIE']
+elif os.environ.get('OS_COOKIE', ''):
+    CONFIG.OS_COOKIE = os.environ.get('OS_COOKIE', '')
 if not CONFIG.OS_COOKIE:
     raise Exception("no OS_COOKIE configured")
 if USER_VARIABLES['USER_AGENT']:
     CONFIG.WB_USER_AGENT = USER_VARIABLES['USER_AGENT']
-elif os.environ['USER_AGENT']:
-    CONFIG.WB_USER_AGENT = os.environ['USER_AGENT']
+elif os.environ.get('USER_AGENT', ''):
+    CONFIG.WB_USER_AGENT = os.environ.get('USER_AGENT', '')
 if USER_VARIABLES['DISCORD_WEBHOOK']:
     CONFIG.DISCORD_WEBHOOK = USER_VARIABLES['DISCORD_WEBHOOK']
-elif os.environ['DISCORD_WEBHOOK']:
-    CONFIG.DISCORD_WEBHOOK = os.environ['DISCORD_WEBHOOK']
+elif os.environ.get('DISCORD_WEBHOOK', ''):
+    CONFIG.DISCORD_WEBHOOK = os.environ.get('DISCORD_WEBHOOK', '')
 
 MESSAGE_TEMPLATE = '''
     {today:#^28}
