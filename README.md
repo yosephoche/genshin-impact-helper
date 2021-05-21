@@ -16,6 +16,14 @@
 
 To run this script, please download the repository and schedule `genshin-os.py` to run every day using an always-on PC, a Raspberry Pi, or cloud services such as Heroku etc.
 
+1. Download and install python 3
+2. Download this repository and unzip it into a folder
+3. Open a terminal in that folder
+4. Run `pip install -r "requirements.txt"` (only needs to be done once)
+5. Run `python genshin-os.py`
+
+You will want to automate the final step to run every day, using tools like cron (linux/mac) or task scheduler (windows). Please google for instructions on how to do this.
+
 You will need to set up the environment variables named `OS_COOKIE`, `USER_AGENT` (and optionally `DISCORD_WEBHOOK`)  
 `USER_AGENT` is basically the identifier of the web browser that you are pretending to be when making the check-in request to Mihoyo's servers.  
 Google "what is my user agent" and it should tell you (hint: it should begin with `Mozilla/5.0`)
