@@ -7,8 +7,8 @@ from requests.exceptions import HTTPError
 
 # hard code your variables here if you are running the script from a private PC
 USER_VARIABLES = {
-    'USER_AGENT': '',  # google "what is my user agent", should begin with Mozilla/5.0
-    'OS_COOKIE': '',  # your genshin/hoyolab login cookie (see below)
+    'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36',  # google "what is my user agent", should begin with Mozilla/5.0
+    'OS_COOKIE': 'UM_distinctid=1781c2902071a9-0644be53639dcd-53e356a-1fa400-1781c290211a0; _MHYUUID=ed8720e0-24c3-4d1c-8f1d-c7f0497505ed; _ga_C7LP62SPC3=GS1.1.1616465375.3.1.1616465473.0; _ga_YPZHJ46G8M=GS1.1.1619233990.11.1.1619234004.0; cookie_token=xVHQk1NqpzIvvYnzazNBiYjbEUPcjIwe24LJce3X; account_id=101301621; ltoken=adAfkDg6VZm8W3h6Qsxwh6sdHOlx7aUdmOZwX3QA; ltuid=101301621; _ga_T29RZCYXZ9=GS1.1.1619400967.4.1.1619401969.0; _ga_B5FWNDKKP0=GS1.1.1620131224.2.1.1620131268.0; CNZZDATA1279249803=1530232208-1615378354-%7C1622166398; mi18nLang=id-id; _ga_9TTX3TE5YL=GS1.1.1622169747.3.1.1622170915.0; _ga=GA1.2.63829487.1613231322; _gid=GA1.2.1758502082.1622985572',  # your genshin/hoyolab login cookie (see below)
     'DISCORD_WEBHOOK': '',  # optional
 }
 # OS_COOKIE Value should look like: login_ticket=xxx; account_id=696969; cookie_token=xxxxx; ltoken=xxxx; ltuid=696969; mi18nLang=en-us; _MHYUUID=xxx
